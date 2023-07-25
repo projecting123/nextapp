@@ -8,6 +8,7 @@ export default function LoginPage() {
   const[data, setData] = useState({})
   const[isLoading, setLoading] = useState(false)
   const router = useRouter()
+  
   const btnHandler = async () => {
     setLoading(true)
     try {
