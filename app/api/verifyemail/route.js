@@ -10,13 +10,13 @@ export async function POST(request){
     const {token} =  reqBody
     const user = await User.findOne({ verifyToken: token});
     if(!user){
-        return NextResponse.json({message: "User not found", status: 404})
+        return NextResponse.json({message: "User not found", type: "not-found"});
     }
     const dateString = new Date(user.verifyTokenExpiry)
     const milliseconds = Date.parse(dateString);
 
     if(milliseconds > Date.now()){
-        return NextResponse.json({message: 'Token has expired', status: 404})
+        return NextResponse.json({message: 'Token has expired', type: "expired"});
     }
 
     user.isvalid = true

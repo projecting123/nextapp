@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 
 export default function VerifyEmail() {
   const[isVerified, setVerified] = useState(false)
-  const[error, setError] = useState(false)
+  const[notFound, setNotFound] = useState(false)
   const[isTokenExpired, setTokenExpired] = useState(null)
   const router = useRouter()
   useEffect(() => {
@@ -17,8 +17,13 @@ export default function VerifyEmail() {
         if(res.data.status == 201){
           setVerified(true)
         }
+        else if("type" in res.data && res.data.type == "expired"){
+          setTokenExpired(true)
+        }
+        else if("type" in res.data && res.data.type == "not-found"){
+          setNotFound(true)
+        }
       } catch (error) {
-        console.log(error.message)
         setError(true)
       }
     }
@@ -27,9 +32,9 @@ export default function VerifyEmail() {
   
   return (
     <div>
-      {error && <h1>You are not verified..</h1>}
-      {isTokenExpired && <h1>Time is expired. You have to request for another </h1>}
-      {isVerified && router.push('login')}
+      {notFound && <h1>User not found</h1>}
+      {!notFound && isTokenExpired && <h1>Token expired, You have to send email again</h1>}
+      {!notFound && !isTokenExpired && isVerified && router.push('login')}
     </div>
   )
 }

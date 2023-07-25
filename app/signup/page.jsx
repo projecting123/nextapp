@@ -1,22 +1,17 @@
 "use client"
 import axios from 'axios'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 export default function SignupPage() {
     const[data, setData] = useState({})
-    const router = useRouter()
     const[isLoading, setLoading] = useState(false)
     const btnHandler = async () => {
       setLoading(true)
       try{
-        const res = await axios.post('/api/signup', data)
+        await axios.post('/api/signup', data)
         setLoading(false)
-        console.log(res)
-        if(res.data.status === 201){
-          router.push('/login')
-        }
+        alert('Registered successfully.')
       }
       catch(err){
         setLoading(false)
