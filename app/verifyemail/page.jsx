@@ -2,13 +2,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 
 export default function VerifyEmail() {
   const[isVerified, setVerified] = useState(false)
   const[notFound, setNotFound] = useState(false)
   const[isTokenExpired, setTokenExpired] = useState(null)
-  const router = useRouter()
   useEffect(() => {
     const token = window.location.search.split("=")[1]
     const verifyEmail = async () => {
@@ -35,7 +35,8 @@ export default function VerifyEmail() {
     <div>
       {notFound && <h1>User not found</h1>}
       {!notFound && isTokenExpired && <h1>Token expired, You have to send email again</h1>}
-      {!notFound && !isTokenExpired && isVerified && router.push('login')}
+      {!notFound && !isTokenExpired && isVerified && <h1 className='text-center'>Thanks...Your email is verified now.</h1>}
+      {isVerified && <h1 className='text-center'>Login <Link href={'/login'}>here</Link> now.</h1>}
     </div>
   )
 }
