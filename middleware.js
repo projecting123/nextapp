@@ -1,19 +1,23 @@
 import { NextResponse } from 'next/server'
- 
+
 
 export function middleware(request) {
     const pathname = request.nextUrl.pathname
-    const isPublic = pathname === '/' || pathname === '/signup' || pathname === '/login'
     const jwtToken = request.cookies.get('token')?.value || ''
-    if(isPublic && jwtToken){
+    const isPublicPath = pathname == "/" || pathname == "/signup" || pathname == "/login"
+    if (isPublicPath && jwtToken) {
         return NextResponse.redirect(new URL('/profile', request.nextUrl))
     }
 
-    if(!isPublic && !jwtToken){
+    if (pathname == "/profile" && !jwtToken) {
         return NextResponse.redirect(new URL('/login', request.nextUrl))
+    }
+
+    if (pathname == "/verifyemail" && !jwtToken) {
+        return NextResponse.redirect(new URL('/', request.nextUrl))
     }
 }
 
 export const config = {
-  matcher: ['/', '/signup', '/login', '/profile'],
+    matcher: ['/', '/signup', '/login', '/profile', '/verifyemail'],
 }

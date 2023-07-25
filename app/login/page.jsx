@@ -13,6 +13,7 @@ export default function LoginPage() {
     try {
       const res = await axios.post('/api/login', data)
       setLoading(false)
+      console.log(res)
       res.data.status == 200 ? router.push('profile') : alert(res.data.message)
     } catch (error) {
       setLoading(false)

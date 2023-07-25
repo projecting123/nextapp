@@ -15,7 +15,7 @@ export default function ProfilePage() {
         console.log(error.message)
       }
     })()
-    status === 404 && router.push('login')
+    // status === 404 && router.push('login')
   }, [status])
 
   return (

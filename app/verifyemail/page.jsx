@@ -14,6 +14,7 @@ export default function VerifyEmail() {
     const verifyEmail = async () => {
       try {
         const res = await axios.post('/api/verifyemail', {token})
+        console.log(res)
         if(res.data.status == 201){
           setVerified(true)
         }

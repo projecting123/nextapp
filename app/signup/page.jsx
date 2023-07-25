@@ -34,7 +34,7 @@ export default function SignupPage() {
         <input name='password' onChange={inputHandler} type="password" placeholder='Create a password' className='px-2 rounded py-1 outline-none focus:ring-2 focus:shadow'/>
         <label htmlFor="name">Confirm Password:</label>
         <input name='cpass' onChange={inputHandler} type="password" placeholder='Confirm your password' className='px-2 rounded py-1 outline-none focus:ring-2 focus:shadow'/>
-        <button disabled={isLoading === true} onClick={btnHandler} type='button' className='px-2 py-1 bg-sky-800 self-center text-white rounded hover:bg-sky-700 transform my-3 transition-all active:scale-95'>{isLoading === true ? "Creating account" : "Create account"}</button>
+        <button disabled={isLoading === true} onClick={btnHandler} type='button' className='px-2 py-1 bg-sky-800 self-center text-white rounded hover:bg-sky-700 transform my-3 transition-all active:scale-95'>{isLoading === true ? "Please wait" : "Create account"}</button>
         <div className='text-center'>
           <div className='flex justify-center items-center gap-2'>
            <p className='h-0.5 bg-black w-16'></p> OR <p className='h-0.5 bg-black w-16'></p>
