@@ -5,10 +5,10 @@ export async function GET() {
     });
 
     return Response.json(
-      { message: "Logout successful" },
-      { status: 200, headers: headers }
+      { message: "Logout successful", status: 'success' },
+      { headers: headers }
     );
   } catch (error) {
-    return Response.json({ message: 'Something went wrong.' }, { status: 404 });
+    return Response.json({ message: 'Something went wrong.', status: 'error'});
   }
 }

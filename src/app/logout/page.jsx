@@ -9,11 +9,11 @@ export default function LogoutPage() {
     const logOut = async () => {
       try {
         const response = await axios.get("api/students/logout");
-        if (response.status === 200) {
+        if (response.data.status === 'error') {
+          console.error("Logout failed:", response.data.message);
+        } else {
           router.push("/login");
           router.refresh()
-        } else {
-          console.error("Logout failed:", response.data.message);
         }
       } catch (error) {
         console.error("Error during logout:", error);
